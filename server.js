@@ -1,27 +1,14 @@
 var mongoose = require('mongoose');
 var express = require('express');
 var app = express();
-var fs = require('fs');
 var unicornsRouter = require(__dirname + '/routes/unicorns_routes');
 
-app.get('/:filename', function(req, res, next) {
-  fs.stat(__dirname + '/build/' + req.params.filename, function(err, stats) {
-    if (err) {
-      console.log(err);
-      return next();
-    }
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/unicorn_dev');
 
-    if (!stats.isFile()) return next();
+app.use(express.static(__dirname + '/build'));
 
-    var file = fs.createReadStream(__dirname + '/build/' + req.params.filename);
-    file.pipe(res);
-  });
-});
+app.use('/api', unicornsRouter);
 
-app.use(function(req, res) {
-  res.status(404).send('could not find file');
-});
-
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log('server up');
 });

@@ -2,18 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Unicorn Wrangling</title>
 </head>
-<body data-ng-app="bearstream">
-  <main data-ng-controller="GreetingController">
-  <h1>This is the beginning of my angular crud ... spencer - remember to add database</h1>
-  <p>{{greeting}}</p>
+<body data-ng-app="UnicornApp">
+  <h1>This is my angular crud ... for unicorns</h1>
+  <main data-ng-controller="UnicornsController" data-ng-init="getAll()">
+    <form name="newUnicornForm" data-ng-submit="create(newUnicorn)">
+      <h2>New Unicorn:</h2>
+      <label for="newUnicornName">Name: </label>
+      <input type="text" id="newUnicornName" required data-ng-model="newUnicorn.name">
 
-  <input type="text" data-ng-model="greeting">
+      <label for="newUnicornColor">Color: </label>
+      <input type="text" id:="newUnicornColor" data-ng-model="newUnicorn.color" placeholder="rainbow">
 
+      <label for="newUnicornSpecies">Species: </label>
+      <input type="text" id="newUnicornSpecies" data-ng-model="newUnicorn.species">
 
-</main>
+      <button type="submit" data-ng-disabled="newUnicornForm.$invalid">Create New Unicorn!!!</button>
+    </form>
+    <ul id="unicornlist">
+      <li data-ng-repeat="unicorn in unicorns">
+        {{unicorn.name}}
+        <form name="unicornForm{{unicorn._id}}" data-ng-submit="update(unicorn)" data-ng-if="unicorn.editing">
+          <h2>New Unicorn:</h2>
+          <label for="unicornName{{unicorn._id}}">Name: </label>
+          <input type="text" id="unicornName{{unicorn._id}}" required data-ng-model="unicorn.name">
 
-<script src="bundle.js"></script>
+          <label for="unicornColor{{unicorn._id}}">Color: </label>
+          <input type="text" id:="unicornColor{{unicorn._id}}" data-ng-model="unicorn.color" placeholder="rainbow">
+
+          <label for="unicornSpecies{{unicorn._id}}">Species: </label>
+          <input type="text" id="unicornSpecies{{unicorn._id}}" data-ng-model="unicorn.species">
+
+          <button type="submit">Place Unicorn In Unicorn Witness Protection</button>
+          <button data-ng-click="unicorn.editing = false">This Unicorn Does Not Deserve Protection</button>
+        </form>
+        <button data-ng-if="!unicorn.editing" data-ng-click="unicorn.editing = true">This Unicorn has seen too much!  New identity!</button>
+        <button data-ng-if="!unicorn.editing" data-ng-click="remove(unicorn)">Murdering Unicorns</button>
+      </li>
+    </ul>
+
+  </main>
+  <script src="/bundle.js"></script>
 </body>
 </html>
