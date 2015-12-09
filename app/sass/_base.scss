@@ -1,3 +1,5 @@
+$h1-margin: 21px;
+
 body {
   background-color: #ECF0F1;
   font-family: 'Open Sans', sans-serif;
@@ -9,17 +11,20 @@ h1 {
   font-family: 'Roboto Mono';
   color: #E74C3C;
   font-size: 4.236em;
-  margin-top: 21px;
-  margin-bottom: 21px;
+  margin-top: $h1-margin;
+  margin-bottom: $h1-margin;
 }
 
-a:visited, a:link {
+button {
   color: #2980B9;
-  text-decoration: none;
-}
 
-a.nav:hover, a.nav:focus {
-  color: #3498DB;
+  &:hover {
+    color: #3498DB;
+  }
+
+  &:focus {
+    color:#3498DB;
+  }
 }
 
 article, nav, h2, footer {
@@ -45,10 +50,6 @@ article {
 
 ul {
   padding-left: 40px;
-}
-
-.Experience li {
-  list-style: square;
 }
 
 footer {
