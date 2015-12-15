@@ -1,25 +1,23 @@
 module.exports = function(app) {
-  app.controller('UnicornsController', ['$scope', '$http', function($scope, $http) {
+  app.controller('UnicornsController', ['$scope', '$http', 'cfResource', function($scope, $http, cfresource) {
     $scope.unicorns = [];
     $scope.newUnicorn = null;
+    var unicornsResource = cfResource('unicorns')
 
     $scope.getAll = function() {
-      $http.get('/api/unicorns')
-        .then(function(res) {
-          $scope.unicorns = res.data;
-        }, function(err) {
-          console.log(err.data);
-        });
+      unicornsResource.getAll(function(err, data) {
+        if (err) return err;
+
+        $scope.unicorns = data;
+      });
     }
 
     $scope.create = function(unicorn) {
-      $http.post('/api/unicorns', unicorn)
-        .then(function(res) {
-          $scope.unicorns.push(res.data);
-          $scope.newUnicorn = null;
-        }, function(err) {
-          console.log(err.data);
-        });
+      unicornsResource.create(unicorn, function(err, data) {
+        if (err) return err;
+        $scope.unicorn.push(data);
+        $scope.newUnicorn = angular.copy($scope.defaults);
+      });
     };
 
     $scope.update = function(unicorn) {
