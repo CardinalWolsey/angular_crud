@@ -1,3 +1,3 @@
 module.exports = function(app) {
-  require('./cf_resources')(app);
+  require('./cf_resource')(app);
 }

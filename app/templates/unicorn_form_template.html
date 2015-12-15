@@ -1,0 +1,13 @@
+<form name="{{formName}}" data-ng-submit="save({unicorn: unicorn})">
+  <h2>{{headingText}}</h2>
+  <label for="unicornName">Name: </label>
+  <input type="text" id="unicornName" required data-ng-model="unicorn.name">
+
+  <label for="unicornColor">Color: </label>
+  <input type="text" id:="unicornColor" data-ng-model="unicorn.color" placeholder="rainbow">
+
+  <label for="unicornSpecies">Species: </label>
+  <input type="text" id="unicornSpecies" data-ng-model="unicorn.species">
+
+  <button type="submit">{{buttonText}}</button>
+</form>

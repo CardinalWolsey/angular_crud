@@ -1,5 +1,5 @@
 var handleSuccess = function(callback) {
-  function(res) {
+  return function(res) {
     callback(null, res.data);
   };
 };
@@ -11,19 +11,19 @@ var handleFail = function(callback) {
 };
 
 module.exports = function(app) {
-  app.factory('cfresource', ['$http', funciton($http) {
+  app.factory('cfResource', ['$http', function($http) {
     return function(resourceName) {
       var resource = {}
-      resource.getAll: function(callback) {
+      resource.getAll =  function(callback) {
         $http.get('/api/' + resourceName)
           .then(handleSuccess(callback), handleFail(callback));
+
       };
 
       resource.create = function(data, callback) {
         $http.post('/api/' + resourceName, data)
           .then(handleSuccess(callback), handleFail(callback));
       };
-
       return resource;
     };
   }]);

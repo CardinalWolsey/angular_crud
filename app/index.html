@@ -8,19 +8,15 @@
 <body data-ng-app="UnicornApp">
   <h1>This is my angular crud ... for unicorns</h1>
   <main data-ng-controller="UnicornsController" data-ng-init="getAll()">
-    <form name="newUnicornForm" data-ng-submit="create(newUnicorn)">
-      <h2>New Unicorn:</h2>
-      <label for="newUnicornName">Name: </label>
-      <input type="text" id="newUnicornName" required data-ng-model="newUnicorn.name">
 
-      <label for="newUnicornColor">Color: </label>
-      <input type="text" id:="newUnicornColor" data-ng-model="newUnicorn.color" placeholder="rainbow">
+  <div data-unicorn-form-directive
+    data-button-text="Create New Unicorn"
+    data-form-name="newUnicornForm"
+    data-heading-text="Create A New Unicorn"
+    data-unicorn="newUnicorn"
+    data-save="create(unicorn)"
+    ></div>
 
-      <label for="newUnicornSpecies">Species: </label>
-      <input type="text" id="newUnicornSpecies" data-ng-model="newUnicorn.species">
-
-      <button type="submit" data-ng-disabled="newUnicornForm.$invalid">Create New Unicorn!!!</button>
-    </form>
     <ul id="unicornlist">
       <li data-ng-repeat="unicorn in unicorns">
         {{unicorn.name}}
