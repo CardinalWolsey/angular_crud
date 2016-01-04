@@ -18,12 +18,19 @@
       <label for="newUnicornSpecies">Species: </label>
       <input type="text" id="newUnicornSpecies" data-ng-model="newUnicorn.species">
 
-      <button type="submit" data-ng-disabled="newUnicornForm.$invalid">Create New Unicorn!!!</button>
+      <!-- <button type="submit" data-ng-disabled="newUnicornForm.$invalid">Create New Unicorn!!!</button> -->
+      <!-- other buttons here? -->
+
+      <button type="submit" data-ng-if="!editing">Create New Unicorn</button>
+      <button type="button" data-ng-if="editing" data-ng-click="submitEdit(newUnicorn)">Submit Edit</button>
+      <button type="button" data-ng-if="editing" data-ng-click="cancelEdit()">Cancel Edit</button>
     </form>
+
     <ul id="unicornlist">
       <li data-ng-repeat="unicorn in unicorns">
         {{unicorn.name}}
-        <form name="unicornForm{{unicorn._id}}" data-ng-submit="update(unicorn)" data-ng-if="unicorn.editing">
+
+        <!-- <form name="unicornForm{{unicorn._id}}" data-ng-submit="update(unicorn)" data-ng-if="unicorn.editing">
           <h2>New Unicorn:</h2>
           <label for="unicornName{{unicorn._id}}">Name: </label>
           <input type="text" id="unicornName{{unicorn._id}}" required data-ng-model="unicorn.name">
@@ -35,10 +42,16 @@
           <input type="text" id="unicornSpecies{{unicorn._id}}" data-ng-model="unicorn.species">
 
           <button type="submit">Place Unicorn In Unicorn Witness Protection</button>
-          <button data-ng-click="unicorn.editing = false">This Unicorn Does Not Deserve Protection</button>
-        </form>
-        <button data-ng-if="!unicorn.editing" data-ng-click="unicorn.editing = true">This Unicorn has seen too much!  New identity!</button>
-        <button data-ng-if="!unicorn.editing" data-ng-click="remove(unicorn)">Murdering Unicorns</button>
+          <button data-ng-show="unicorn.editing" data-ng-click="cancelEdit(unicorn)">This Unicorn Does Not Deserve Protection</button>
+        </form> -->
+
+
+<!--
+        <button data-ng-if="!unicorn.editing" data-ng-click="edit(unicorn)">This Unicorn has seen too much!  New identity! ... edit Unicorn</button>
+        <button data-ng-if="!unicorn.editing" data-ng-click="remove(unicorn)">Murdering Unicorns</button> -->
+
+        <button type="button" data-ng-if="!editing" data-ng-click="edit(unicorn)">Edit Unicorn</button>
+        <button type="button" data-ng-if="!editing" data-ng-click="remove(unicorn)">Delete Unicorn</button>
       </li>
     </ul>
 
@@ -46,3 +59,5 @@
   <script src="/bundle.js"></script>
 </body>
 </html>
+
+
